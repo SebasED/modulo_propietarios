@@ -21,9 +21,9 @@ exports.obtenerPorId = async (req, res) => {
 
 exports.agregar = async (req, res) => {
     try {
-        const { name, lastname } = req.body;
+        const { name, lastname, registration_creator, registry_updater, cedula, cellphone, e_mail, address, pets } = req.body;
         if (name && lastname) {
-            const nuevoPropietario = new Propietario({name, lastname});
+            const nuevoPropietario = new Propietario({name, lastname, registration_creator, registry_updater, cedula, cellphone, e_mail, address, pets});
             await nuevoPropietario.save();
             res.json({msg: "Se agrego al propietario satisfactoriamente", id: nuevoPropietario._id});
         }else{
@@ -47,7 +47,9 @@ exports.actualizar = async (req, res) => {
             res.json({msg: "Datos insuficientes"});
         }
     } catch (error) {
+        console.log(error);
         res.json(error);
+
     }    
 }
 

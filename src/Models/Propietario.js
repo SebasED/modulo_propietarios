@@ -4,7 +4,7 @@ const PropietarioSchema = new Schema ({
     name:  {
         type: String,
         required: true
-    }, // String is shorthand for {type: String}
+    }, 
     lastname: {
         type: String,
         required: true
@@ -47,7 +47,12 @@ const PropietarioSchema = new Schema ({
         type: String,
         required: true
     },
-    pets:[{ name: String, id: Number }]
+    pets:[
+        { 
+            name: String, 
+            id: Number 
+        }
+    ]
 });
 
 module.exports = model ("Propietario", PropietarioSchema)
