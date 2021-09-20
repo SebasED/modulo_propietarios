@@ -2,12 +2,10 @@ const { Schema, model } = require("mongoose");
 
 const PropietarioSchema = new Schema ({
     name:  {
-        type: String,
-        required: true
+        type: String
     }, 
     lastname: {
-        type: String,
-        required: true
+        type: String
     },
     active: {
         type: Boolean,
@@ -15,37 +13,29 @@ const PropietarioSchema = new Schema ({
     },
     creation_date: { 
         type: Date, 
-        default: Date.now, 
-        required: true
+        default: Date.now
     },
     update_date: { 
         type: Date, 
-        default: Date.now,
-        required: true 
+        default: Date.now
     },
     registration_creator: {
-        type: String,
-        required: true
+        type: String
     },
     registry_updater: {
-        type: String,
-        required: true
+        type: String
     },
     cedula: {
-        type: Number,
-        required: true
+        type: Number
     },
     cellphone: {
-        type: Number,
-        required: true
+        type: Number
     },
     e_mail: {
-        type: String,
-        required: true
+        type: String
     },
     address: {
-        type: String,
-        required: true
+        type: String
     },
     pets:[
         { 
