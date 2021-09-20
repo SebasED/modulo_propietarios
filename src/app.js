@@ -9,7 +9,7 @@ conexionDB();
 
 // settings
 app.set("name", "owner_module");
-app.set("port", process.env.port || 3500)
+app.set("port", process.env.PORT || 3500)
 
 //middleware
 app.use( express.json() );
