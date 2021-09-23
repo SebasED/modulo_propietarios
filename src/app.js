@@ -1,26 +1,22 @@
+require('./config');
 const express = require('express');
-const morgan = require("morgan");
-const conexionDB = require("./db.conexion");
-const routerPropietario = require("./routes/propietario.routes");
+const morgan = require('morgan');
+const cors = require('cors');
+const conexionDB = require('./db.conexion');
+const ownerRoutes = require('./routes/owner.routes');
+
 const app = express();
 
 // Conexión a la BD
 conexionDB();
 
-// settings
-app.set("name", "owner_module");
-app.set("port", process.env.PORT || 3500)
+app.set('port', process.env.PORT || 3500);
 
 //middleware
-app.use( express.json() );
-app.use(morgan("common"));
+app.use(express.json());
+app.use(cors());
+app.use(morgan('common'));
 
-// Llamado de rutas
-app.get('/', (req, res) => {
-  res.send('Owner Module!')
-});
-
-app.use("/api/propietario", routerPropietario )
-
+app.use('/api/owner', ownerRoutes);
 
 module.exports = app;
