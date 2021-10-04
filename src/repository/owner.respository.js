@@ -44,10 +44,26 @@ const deleteOwnerRepository = async ownerId => {
   }
 };
 
+const addPetRepository = async data =>{
+  try {
+    const {owner_id, pet_id} = data;
+    const owner = await Owner.findById(owner_id);
+    owner.pets.push(pet_id);
+    const updateOwner = await Owner.findByIdAndUpdate(owner_id, owner, {
+      new: true,
+    });
+    return updateOwner;
+  } catch (error) {
+    throw new DatabaseException('Lo sentimos, ha ocurrido un problema');
+  }
+  
+}
+
 module.exports = {
   createOwnerRepository,
   getOwnersRepositroy,
   getOwnerByIdRepository,
   updateOwnerRepository,
   deleteOwnerRepository,
+  addPetRepository,
 };

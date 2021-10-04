@@ -25,11 +25,11 @@ const getOwnerByIdService = async ownerId => {
 };
 
 const updateOwnerService = async (ownerId, owner) => {
-  const { name, lastname, created_by, document, phonenumber, email, address } = owner;
+  const { name, lastname, updated_by, document, phonenumber, email, address } = owner;
   if (
     name === '' ||
     lastname === '' ||
-    created_by === '' ||
+    updated_by === '' ||
     document === '' ||
     phonenumber === '' ||
     email === '' ||
@@ -44,10 +44,19 @@ const deleteOwnerService = async ownerId => {
   return await ownerRepository.deleteOwnerRepository(ownerId);
 };
 
+const addPetService = async data => {
+  const {owner_id, pet_id} = data;
+  if(owner_id === '' || pet_id === '' || pet_id === undefined || owner_id === undefined)    
+    return('Para agregar una mascota debe enviar tanto el owner_id como el pet_id'); 
+
+return await ownerRepository.addPetRepository(data);
+}
+
 module.exports = {
   createOwnerService,
   getOwnersService,
   getOwnerByIdService,
   updateOwnerService,
   deleteOwnerService,
+  addPetService,
 };

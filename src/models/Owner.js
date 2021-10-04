@@ -38,12 +38,7 @@ const OwnerSchema = new Schema(
     address: {
       type: String,
     },
-    pets: [
-      {
-        name: String,
-        id: String,
-      },
-    ],
+    pets: [],
   },
   {
     versionKey: false,

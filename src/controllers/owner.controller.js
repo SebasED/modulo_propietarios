@@ -56,10 +56,20 @@ const deleteOwnerByIdController = async (req, res) => {
   }
 };
 
+const addPetController = async (req, res) => {
+  const data = req.body;
+  const updatePetOwner = await ownerService.addPetService(data);
+  if (updatePetOwner === String) {
+    return res.status(400).json({message: updatePetOwner});
+  }
+  return res.status(200).json(updatePetOwner);
+};
+
 module.exports = {
   getOwnersController,
   getOwnerByIdController,
   createOwnerController,
   updateOwnerByIdController,
   deleteOwnerByIdController,
+  addPetController,
 };
