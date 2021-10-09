@@ -3,7 +3,7 @@ const config = require('../config');
 
 const verifyToken = async (req, res, next) => {
   try {
-    const { data } = await axios.get(config.SECURITY_MODULE, {
+    const { data } = await axios.get(`${config.SECURITY_MODULE}/verifytoken`, {
       headers: {
         Authorization: `${req.headers.authorization}`,
       },

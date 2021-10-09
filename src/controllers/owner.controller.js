@@ -57,12 +57,25 @@ const deleteOwnerByIdController = async (req, res) => {
 };
 
 const addPetController = async (req, res) => {
-  const data = req.body;
-  const updatePetOwner = await ownerService.addPetService(data);
-  if (updatePetOwner === String) {
-    return res.status(400).json({message: updatePetOwner});
+  try {
+    const data = req.body;
+    const updatePetOwner = await ownerService.addPetService(data);
+    return res.status(200).json(updatePetOwner);
+  } catch (error) {
+    if (error instanceof BaseException) return res.status(error.getStatusCode()).json({ message: error.getErrorMessage() });
+    return res.status(500).json({ message: 'Lo sentimos, ha ocurrido un problema' });
   }
-  return res.status(200).json(updatePetOwner);
+};
+
+const generateGuestTokenController = async (req, res) => {
+  try {
+    const { email } = req.body;
+    await ownerService.generateGuestTokenService(email);
+    return res.status(200).json({ message: 'Ha sido enviado un email a su correo para el ingreso a la aplicación' });
+  } catch (error) {
+    if (error instanceof BaseException) return res.status(error.getStatusCode()).json({ message: error.getErrorMessage() });
+    return res.status(500).json({ message: 'Lo sentimos, ha ocurrido un problema' });
+  }
 };
 
 module.exports = {
@@ -72,4 +85,5 @@ module.exports = {
   updateOwnerByIdController,
   deleteOwnerByIdController,
   addPetController,
+  generateGuestTokenController,
 };

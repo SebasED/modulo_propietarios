@@ -26,6 +26,14 @@ const getOwnerByIdRepository = async ownerId => {
   }
 };
 
+const getOwnerByEmailRepository = async ownerEmail => {
+  try {
+    return await Owner.findOne({ email: ownerEmail });
+  } catch (error) {
+    throw new DatabaseException('Lo sentimos, ha ocurrido un problema');
+  }
+};
+
 const updateOwnerRepository = async (ownerId, owner) => {
   try {
     return await Owner.findByIdAndUpdate(ownerId, owner, {
@@ -44,9 +52,9 @@ const deleteOwnerRepository = async ownerId => {
   }
 };
 
-const addPetRepository = async data =>{
+const addPetRepository = async data => {
   try {
-    const {owner_id, pet_id} = data;
+    const { owner_id, pet_id } = data;
     const owner = await Owner.findById(owner_id);
     owner.pets.push(pet_id);
     const updateOwner = await Owner.findByIdAndUpdate(owner_id, owner, {
@@ -56,8 +64,7 @@ const addPetRepository = async data =>{
   } catch (error) {
     throw new DatabaseException('Lo sentimos, ha ocurrido un problema');
   }
-  
-}
+};
 
 module.exports = {
   createOwnerRepository,
@@ -66,4 +73,5 @@ module.exports = {
   updateOwnerRepository,
   deleteOwnerRepository,
   addPetRepository,
+  getOwnerByEmailRepository,
 };

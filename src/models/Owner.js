@@ -34,6 +34,7 @@ const OwnerSchema = new Schema(
     },
     email: {
       type: String,
+      unique: true,
     },
     address: {
       type: String,

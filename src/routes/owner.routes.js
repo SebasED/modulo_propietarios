@@ -8,6 +8,7 @@ const router = Router();
 router.get('/', verifyTokenMiddleware, roleMiddleware.verifyAdminRole, ownerController.getOwnersController);
 router.get('/:owner_id', ownerController.getOwnerByIdController);
 router.post('/', ownerController.createOwnerController);
+router.post('/guest', ownerController.generateGuestTokenController);
 router.put('/:owner_id', ownerController.updateOwnerByIdController);
 router.delete('/:owner_id', ownerController.deleteOwnerByIdController);
 router.put('/', ownerController.addPetController);
